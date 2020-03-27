@@ -1,13 +1,8 @@
-import React  from 'react';
-
-import Header from '../compontents/Header';
-import Navigation from '../compontents/Navigation';
+import React from 'react';
 
 const Home = () => {
   return (
     <div>
-      <Header/>
-      <Navigation/>
       <p>This is the Home Page.</p>
     </div>
   );
