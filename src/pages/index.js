@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import Layout shared component
-import Layout from '../compontents/Layout';
+import Layout from '../components/Layout';
 // import routes
 import Home from './home';
 import MyNotes from './mynotes';
