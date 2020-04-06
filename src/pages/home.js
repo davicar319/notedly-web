@@ -1,12 +1,40 @@
 import React from 'react';
-import Button from '../components/Button';
+import { gql, useQuery } from '@apollo/client';
+import NoteFeed from '../components/NoteFeed';
+
+
+const GET_NOTES = gql`
+    query NoteFeed($cursor: String) {
+        noteFeed(cursor: $cursor) {
+            cursor
+            hasNextPage
+            notes {
+                id
+                createdAt
+                content
+                favoriteCount
+                author {
+                    username
+                    id
+                    avatar
+                }
+            }
+        }
+    }
+`;
 
 const Home = () => {
+  // query hook
+  const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
+
+  // if the data is loading, display a loading message.
+  if (loading) return <p>Loading...</p>;
+  // if there is an error fetching the data, display an error message.
+  if (error) return <p>Error!</p>;
+
+  //If the data is successful, display the data in our UI
   return (
-    <div>
-      <p>This is the Home Page.</p>
-      <Button>Click Me!</Button>
-    </div>
+    <NoteFeed notes={data.noteFeed.notes}/>
   );
 };
 
