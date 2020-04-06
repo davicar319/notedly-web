@@ -1,6 +1,7 @@
 import React from 'react';
 import { gql, useQuery } from '@apollo/client';
 import NoteFeed from '../components/NoteFeed';
+import Button from '../components/Button';
 
 
 const GET_NOTES = gql`
@@ -34,7 +35,37 @@ const Home = () => {
 
   //If the data is successful, display the data in our UI
   return (
-    <NoteFeed notes={data.noteFeed.notes}/>
+    <React.Fragment>
+      <NoteFeed notes={data.noteFeed.notes}/>
+      {data.noteFeed.hasNextPage && (
+        //  onClick peform a query, passing the current cursor as a variable
+        <Button
+          onClick={() =>
+            fetchMore({
+              variables: {
+                cursor: data.noteFeed.cursor
+              },
+              updateQuery: (previousResult, { fetchMoreResult }) => {
+                return {
+                  noteFeed: {
+                    cursor: fetchMoreResult.noteFeed.cursor,
+                    hasNextPage: fetchMoreResult.noteFeed.hasNextPage,
+                    // combine the new results and the old
+                    notes: [
+                      ...previousResult.noteFeed.notes,
+                      ...fetchMoreResult.noteFeed.notes
+                    ],
+                    __typename: 'noteFeed'
+                  }
+                };
+              }
+            })
+          }
+        >
+          Load more
+        </Button>
+      )}
+    </React.Fragment>
   );
 };
 
