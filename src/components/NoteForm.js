@@ -24,7 +24,7 @@ const NoteForm = props => {
   const onChange = event => {
     setValue({
       ...value,
-      [event.target.name]: event.targe.value
+      [event.target.name]: event.target.value
     });
   };
 
@@ -49,3 +49,5 @@ const NoteForm = props => {
     </Wrapper>
   );
 };
+
+export default NoteForm;
