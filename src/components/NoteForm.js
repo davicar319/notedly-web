@@ -35,16 +35,20 @@ const NoteForm = props => {
           e.preventDefault();
           props.action({
             variables: {
-              ...values
+              ...value
             }
           });
         }}
       >
-        <TextArea required={true} type={'text'} name={'content'}
-                  placeholder={'Note content'} value={value.content}
-                  onChange={onChange}
+        <TextArea
+          required
+          type="text"
+          name="content"
+          placeholder="Note content"
+          value={value.content}
+          onChange={onChange}
         />
-        <Button type={'submit'}>Save</Button>
+        <Button type="submit">Save</Button>
       </Form>
     </Wrapper>
   );
