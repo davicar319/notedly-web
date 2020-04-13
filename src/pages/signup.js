@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { gql, useMutation } from '@apollo/client';
+import { gql, useApolloClient, useMutation } from '@apollo/client';
 import styled from 'styled-components';
 
 import Button from '../components/Button';
@@ -47,11 +47,17 @@ const SignUp = props => {
     document.title = 'Sign Up -- Notedly';
   });
 
+  const client = useApolloClient();
+
   // add the mutation hook
   const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
     onCompleted: data => {
-      // console.log the JSON Web Token when the mutation is complete.
-      console.log(data.signUp);
+      // store the JWT in localStorage.
+      localStorage.setItem('token', data.signUp);
+      // update the local cache.
+      client.writeData({ data: { isLoggedIn: true } });
+      // redirect the user to the homepage.
+      props.history.push('/');
     }
   });
 
