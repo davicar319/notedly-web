@@ -1,5 +1,5 @@
 import React from 'react';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 // import Layout shared component
 import Layout from '../components/Layout';
@@ -11,12 +11,7 @@ import NotePage from './note';
 import SignUp from './signup';
 import SignIn from './signin';
 import NewNote from './new';
-
-const IS_LOGGED_IN = gql`
-    {
-        isLoggedIn @client
-    }
-`;
+import { IS_LOGGED_IN } from '../gql/query';
 
 
 const Pages = () => {

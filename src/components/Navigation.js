@@ -51,6 +51,9 @@ const Navigation = () => {
           <Link to={'/'}>Home</Link>
         </li>
         <li>
+          <Link to={'/new'}>New</Link>
+        </li>
+        <li>
           <Link to={'/mynotes'}>My Notes</Link>
         </li>
         <li>
